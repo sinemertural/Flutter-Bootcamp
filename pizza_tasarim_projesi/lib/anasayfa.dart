@@ -12,6 +12,15 @@ class Anasayfa extends StatefulWidget {
 class _AnasayfaState extends State<Anasayfa> {
   @override
   Widget build(BuildContext context) {
+    
+    //çoklu ekran desteği 
+    var ekranBilgisi = MediaQuery.of(context);
+    var ekranYukseklik = ekranBilgisi.size.height;
+    var ekranGenisligi = ekranBilgisi.size.width;
+    print("Ekran Yükseklik : $ekranYukseklik");
+    print("Ekran Genislik : $ekranGenisligi");
+    
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Pizza" , style: TextStyle(color: yaziRenk1 , fontFamily: "Pacifico" , fontSize: 22),),
@@ -22,7 +31,7 @@ class _AnasayfaState extends State<Anasayfa> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 16),
+              padding:  EdgeInsets.only(top: ekranGenisligi/43),
               child: Text("Beef Cheese" , style: TextStyle(fontSize: 36 , color: anaRenk , fontWeight: FontWeight.bold ),),
             ),
             Padding(
@@ -34,21 +43,10 @@ class _AnasayfaState extends State<Anasayfa> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextButton(onPressed: (){},
-                    child: Text("Cheese" , style: TextStyle(color: yaziRenk1),),
-                      style: TextButton.styleFrom(backgroundColor: anaRenk),),
-
-                  TextButton(onPressed: (){},
-                    child: Text("Sausage" , style: TextStyle(color: yaziRenk1),),
-                    style: TextButton.styleFrom(backgroundColor: anaRenk),),
-
-                  TextButton(onPressed: (){},
-                    child: Text("Olive" , style: TextStyle(color: yaziRenk1),),
-                    style: TextButton.styleFrom(backgroundColor: anaRenk),),
-
-                  TextButton(onPressed: (){},
-                    child: Text("Pepper" , style: TextStyle(color: yaziRenk1),),
-                    style: TextButton.styleFrom(backgroundColor: anaRenk),),
+                  Chip(icerik: "Cheese"),
+                  Chip(icerik: "Sausage"),
+                  Chip(icerik: "Olive"),
+                  Chip(icerik: "Pepper"),
                 ],
               ),
             ),
@@ -85,5 +83,17 @@ class _AnasayfaState extends State<Anasayfa> {
 
       ),
     );
+  }
+}
+
+class Chip extends StatelessWidget {
+  String icerik;
+  Chip({required this.icerik});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(onPressed: (){},
+      child: Text(icerik , style: TextStyle(color: yaziRenk1),),
+      style: TextButton.styleFrom(backgroundColor: anaRenk),);
   }
 }
